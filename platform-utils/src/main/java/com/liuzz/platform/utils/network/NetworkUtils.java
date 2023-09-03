@@ -1,7 +1,7 @@
 package com.liuzz.platform.utils.network;
 
+import com.liuzz.platform.utils.UtilException;
 import com.liuzz.platform.utils.array.CollectionUtils;
-import com.sun.xml.internal.ws.util.UtilException;
 
 import java.net.*;
 import java.util.Enumeration;

@@ -1,8 +1,8 @@
 package com.liuzz.platform.utils.id;
 
+import com.liuzz.platform.utils.UtilException;
 import com.liuzz.platform.utils.network.NetworkUtils;
 import com.liuzz.platform.utils.network.Pid;
-import com.sun.xml.internal.ws.util.UtilException;
 import org.springframework.util.Assert;
 
 public class IdUtils {
