@@ -1,0 +1,4 @@
+com.liuzz.platform.framework.SpringUtils
+com.liuzz.platform.framework.json.JsonAutoConfiguration
+com.liuzz.platform.framework.web.WebAutoConfiguration
+com.liuzz.platform.framework.executer.ExecutorAutoConfiguration
