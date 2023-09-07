@@ -59,6 +59,11 @@
                 <artifactId>platform-spring-boot-starter-web</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.tbyf</groupId>
+                <artifactId>platform-api</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
 
             <!-- Spring 核心 -->

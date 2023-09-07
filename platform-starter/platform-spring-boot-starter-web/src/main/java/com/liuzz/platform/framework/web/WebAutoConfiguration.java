@@ -6,6 +6,7 @@ import com.liuzz.platform.framework.web.filter.CacheRequestBodyFilter;
 import com.liuzz.platform.common.constants.WebFilterOrder;
 import com.liuzz.platform.framework.web.filter.TraceFilter;
 import com.liuzz.platform.utils.date.DatePattern;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
@@ -27,6 +28,7 @@ import javax.servlet.Filter;
 @EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
 @EnableAsync
 @AutoConfiguration
+@Slf4j
 public class WebAutoConfiguration implements WebMvcConfigurer {
 
     /**
@@ -43,6 +45,7 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
         // 创建 UrlBasedCorsConfigurationSource 对象
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config); // 对接口配置跨域设置
+        log.debug("===== 跨域配置加载 =====");
         return createFilterBean(new CorsFilter(source), WebFilterOrder.START);
     }
 
@@ -51,21 +54,25 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     public FilterRegistrationBean<CacheRequestBodyFilter> requestBodyCacheFilter() {
+        log.debug("===== 请求流可重复读Filter加载,order:{} =====",WebFilterOrder.REQUEST_BODY_CACHE_FILTER);
         return createFilterBean(new CacheRequestBodyFilter(), WebFilterOrder.REQUEST_BODY_CACHE_FILTER);
     }
 
     @Bean
     public FilterRegistrationBean<TraceFilter> traceFilter() {
+        log.debug("===== TraceId链路追踪Filter加载,order:{} =====",WebFilterOrder.TRACE_FILTER);
         return createFilterBean(new TraceFilter(), WebFilterOrder.TRACE_FILTER);
     }
 
     @Bean
     public FilterRegistrationBean<ApiFilter> apiFilter() {
+        log.debug("===== 接口API通用Filter加载,order:{} =====",WebFilterOrder.API_FILTER);
         return createFilterBean(new ApiFilter(), WebFilterOrder.API_FILTER);
     }
 
     @Bean
     public GlobalExceptionHandler globalExceptionHandler() {
+        log.debug("===== RestControllerAdvice 错误处理器加载 =====");
         return new GlobalExceptionHandler();
     }
 
@@ -96,6 +103,7 @@ public class WebAutoConfiguration implements WebMvcConfigurer {
      */
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+        log.debug("===== RestTemplate 自动加载 =====");
         return restTemplateBuilder.build();
     }
 

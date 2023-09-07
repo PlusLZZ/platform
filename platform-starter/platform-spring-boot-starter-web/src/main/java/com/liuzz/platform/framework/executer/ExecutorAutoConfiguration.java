@@ -1,5 +1,6 @@
 package com.liuzz.platform.framework.executer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -12,6 +13,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 默认线程池实现
  */
 @AutoConfiguration
+@Slf4j
 public class ExecutorAutoConfiguration implements AsyncConfigurer {
 
     @Override
@@ -30,6 +32,8 @@ public class ExecutorAutoConfiguration implements AsyncConfigurer {
         taskExecutor.setAwaitTerminationSeconds(60);
         taskExecutor.setThreadNamePrefix("platform-");
         taskExecutor.initialize();
+        log.debug("===== 自定义Boot内置线程池,CorePoolSize={},MaxPoolSize={},QueueCapacity={},NamePrefix={} =====",
+                taskExecutor.getCorePoolSize(), taskExecutor.getMaxPoolSize(), taskExecutor.getQueueCapacity(), taskExecutor.getThreadNamePrefix());
         return taskExecutor;
     }
 

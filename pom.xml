@@ -12,6 +12,8 @@
         <module>platform-starter</module>
         <module>platform-utils</module>
         <module>platform-nacos</module>
+        <module>platform-api</module>
+        <module>platform-auth</module>
     </modules>
 
     <properties>

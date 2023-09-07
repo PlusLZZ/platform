@@ -52,6 +52,7 @@ public class SpringUtils implements ApplicationContextAware, DisposableBean {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringUtils.applicationContext = applicationContext;
         environment = applicationContext.getEnvironment();
+        log.debug("===== SpringUtils 自动加载 =====");
     }
 
     /**

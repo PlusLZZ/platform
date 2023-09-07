@@ -2,7 +2,7 @@ package com.liuzz.platform.common.domain;
 
 public interface GlobalCode {
 
-    ErrorCode SUCCESS = new ErrorCode(0, "请求成功");
+    ErrorCode SUCCESS = new ErrorCode(200, "请求成功");
 
     // ========== 客户端错误段 ==========
 

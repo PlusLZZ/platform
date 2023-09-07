@@ -11,18 +11,21 @@ import com.liuzz.platform.utils.array.CollectionUtils;
 import com.liuzz.platform.utils.date.DatePattern;
 import com.liuzz.platform.utils.string.StringUtils;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+@Slf4j
 public class JsonUtils {
 
     private static ObjectMapper objectMapper = initMapper();
 
     public static void init(ObjectMapper mapper){
         objectMapper = mapper;
+        log.debug("===== 注入Json工具类:{} =====",mapper);
     }
 
     public static ObjectMapper getInstance(){
