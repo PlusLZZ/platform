@@ -1,5 +1,6 @@
 package com.liuzz.platform.framework.executer;
 
+import com.alibaba.ttl.threadpool.TtlExecutors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +35,8 @@ public class ExecutorAutoConfiguration implements AsyncConfigurer {
         taskExecutor.initialize();
         log.debug("===== 自定义Boot内置线程池,CorePoolSize={},MaxPoolSize={},QueueCapacity={},NamePrefix={} =====",
                 taskExecutor.getCorePoolSize(), taskExecutor.getMaxPoolSize(), taskExecutor.getQueueCapacity(), taskExecutor.getThreadNamePrefix());
-        return taskExecutor;
+        return TtlExecutors.getTtlExecutor(taskExecutor);
+        //return taskExecutor;
     }
 
 }
