@@ -26,6 +26,11 @@ public class WebFilterOrder {
      */
     public static final int REQUEST_BODY_CACHE_FILTER = START + 100;
 
+    /**
+     * 登录权限过滤器
+     */
+    public static final int AUTH_FILTER = START + 200;
+
 
     /**
      * 最后请求
