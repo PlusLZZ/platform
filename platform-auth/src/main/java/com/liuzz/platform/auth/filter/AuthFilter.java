@@ -1,5 +1,6 @@
 package com.liuzz.platform.auth.filter;
 
+import com.liuzz.platform.auth.config.core.AuthManage;
 import com.liuzz.platform.common.constants.AuthConstant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,14 +15,15 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 @Slf4j
-public class LoginFilter extends OncePerRequestFilter {
+public class AuthFilter extends OncePerRequestFilter {
 
     private final PathMatcher matcher;
 
+    private final AuthManage authManage;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
-        filterChain.doFilter(request, response);
+        authManage.handle(request,response);
     }
 
     /**
@@ -30,6 +32,7 @@ public class LoginFilter extends OncePerRequestFilter {
      */
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return !matcher.match(AuthConstant.LOGIN_URL,request.getRequestURI());
+        String uri = request.getRequestURI();
+        return AuthConstant.FILTER_URLS.stream().noneMatch(url->matcher.match(url,uri));
     }
 }

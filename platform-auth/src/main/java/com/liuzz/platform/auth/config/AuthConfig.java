@@ -1,6 +1,7 @@
 package com.liuzz.platform.auth.config;
 
-import com.liuzz.platform.auth.filter.LoginFilter;
+import com.liuzz.platform.auth.config.core.AuthManage;
+import com.liuzz.platform.auth.filter.AuthFilter;
 import com.liuzz.platform.common.constants.WebFilterOrder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,8 @@ public class AuthConfig {
 
     private final PathMatcher pathMatcher;
 
+    private final AuthManage authManage;
+
     public static <T extends Filter> FilterRegistrationBean<T> createFilterBean(T filter, Integer order) {
         FilterRegistrationBean<T> bean = new FilterRegistrationBean<>(filter);
         bean.setOrder(order);
@@ -25,9 +28,9 @@ public class AuthConfig {
     }
 
     @Bean
-    public FilterRegistrationBean<LoginFilter> loginFilter() {
-        log.debug("===== 登录验证过滤器加载,order:{} =====", WebFilterOrder.AUTH_FILTER);
-        return createFilterBean(new LoginFilter(pathMatcher), WebFilterOrder.AUTH_FILTER);
+    public FilterRegistrationBean<AuthFilter> loginFilter() {
+        log.debug("===== 统一认证过滤器加载,order:{} =====", WebFilterOrder.AUTH_FILTER);
+        return createFilterBean(new AuthFilter(pathMatcher,authManage), WebFilterOrder.AUTH_FILTER);
     }
 
 }

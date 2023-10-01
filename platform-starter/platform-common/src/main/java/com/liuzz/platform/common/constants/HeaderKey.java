@@ -9,4 +9,6 @@ public class HeaderKey {
 
     public static final String REQUEST_TIME = "request-time";
 
+    public static final String AUTHORIZATION = "Authorization";
+
 }
